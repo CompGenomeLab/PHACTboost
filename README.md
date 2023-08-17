@@ -5,7 +5,9 @@ PHACTboost is a gradiatent boosting tree based classifier that combines PHACT sc
 # Variant Set Construction
 
 ClinVar (main data): https://ftp.ncbi.nlm.nih.gov/pub/clinvar/tab_delimited/archive/variant_summary_2023-02.txt.gz
-gnomAD: 
+
+gnomAD: https://gnomad.broadinstitute.org/downloads#v3
+
 HSV: https://ftp.uniprot.org/pub/databases/uniprot/current_release/knowledgebase/variants/homo_sapiens_variation.txt.gz
 
 List of all variants added to ClinVar from 2015-2019 to construct training set:
