@@ -2,7 +2,19 @@
 
 PHACTboost is a gradiatent boosting tree based classifier that combines PHACT scores with information from multiple sequence alignment, phylogenetic trees, and ancestral reconstruction. Our comprehensive experiments on 20,191 human proteins encompassing 219 million amino acid substitution  demonstrate that PHACTboost overpeforms 40 available pathogenicity predictors  including the recent ones such as EVE and CPT-1. 
 
-# Distribution and reproducibility
+# Variant Set Construction
+
+ClinVar (main data): https://ftp.ncbi.nlm.nih.gov/pub/clinvar/tab_delimited/archive/variant_summary_2023-02.txt.gz
+gnomAD: 
+HSV: https://ftp.uniprot.org/pub/databases/uniprot/current_release/knowledgebase/variants/homo_sapiens_variation.txt.gz
+
+List of all variants added to ClinVar from 2015-2019 to construct training set:
+https://ftp.ncbi.nlm.nih.gov/pub/clinvar/tab_delimited/archive/2019 (12 files)
+https://ftp.ncbi.nlm.nih.gov/pub/clinvar/tab_delimited/archive/2018 (12 files)
+https://ftp.ncbi.nlm.nih.gov/pub/clinvar/tab_delimited/archive/2017 (12 files)
+https://ftp.ncbi.nlm.nih.gov/pub/clinvar/tab_delimited/archive/2016 (12 files)
+https://ftp.ncbi.nlm.nih.gov/pub/clinvar/tab_delimited/archive/2015 (11 files)
+
 
 # Citing this work
 
