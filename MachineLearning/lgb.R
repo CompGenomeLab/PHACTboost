@@ -1,6 +1,6 @@
 library(lightgbm)
 library(AUC)
-source("./lgb_grid_cv_18082022.R")
+source("./lgb_grid_cv.R")
 
 load("Train_gnomAD_Shared.RData")
 load("Test_gnomAD_Shared.RData")
