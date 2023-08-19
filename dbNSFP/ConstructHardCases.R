@@ -14,7 +14,7 @@ tools_considering_AF <- c("MetaSVM_rankscore", "MetaLR_rankscore", "MetaRNN_rank
                           "BayesDel_addAF_rankscore", "BayesDel_noAF_rankscore", "M-CAP_rankscore",
                           "MutPred_rankscore", "ClinPred_rankscore")
 
-check <- check[-match(tools_considering_AF, colnames(check))]
+check <- check[,-match(tools_considering_AF, colnames(check))]
 
 dis <- c()
 keep <- c()
