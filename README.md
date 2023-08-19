@@ -2,6 +2,11 @@
 
 PHACTboost is a gradiatent boosting tree based classifier that combines PHACT scores with information from multiple sequence alignment, phylogenetic trees, and ancestral reconstruction. Our comprehensive experiments on 20,191 human proteins encompassing 219 million amino acid substitution  demonstrate that PHACTboost overpeforms 40 available pathogenicity predictors  including the recent ones such as EVE and CPT-1. 
 
+# Input Data
+
+PHACTboost uses PHACT scores [Link Text](https://github.com/CompGenomeLab/PHACT) and their different versions (or related components) as features. The other input feature groups consist of gene and sequence position-specific features from the phylogenetic tree, ancestral probability distributions to integrate the structural properties of the phylogenetic tree and MSA-based frequency calculations as input features. Additionally, PHACTboost uses amino acid classes to utilize amino acid properties.
+
+
 # Variant Set Construction
 
 ClinVar (main data): https://ftp.ncbi.nlm.nih.gov/pub/clinvar/tab_delimited/archive/variant_summary_2023-02.txt.gz
