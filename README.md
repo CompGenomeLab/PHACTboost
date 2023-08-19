@@ -4,7 +4,7 @@ PHACTboost is a gradiatent boosting tree based classifier that combines PHACT sc
 
 # Input Data
 
-PHACTboost uses PHACT scores [Link Text](https://github.com/CompGenomeLab/PHACT) and their different versions (or related components) as features. The other input feature groups consist of gene and sequence position-specific features from the phylogenetic tree, ancestral probability distributions to integrate the structural properties of the phylogenetic tree and MSA-based frequency calculations as input features. Additionally, PHACTboost uses amino acid classes to utilize amino acid properties.
+PHACTboost uses [PHACT scores](https://github.com/CompGenomeLab/PHACT) and their different versions (or related components) as features. The other input feature groups consist of gene and sequence position-specific features from the phylogenetic tree, ancestral probability distributions to integrate the structural properties of the phylogenetic tree and MSA-based frequency calculations as input features. Additionally, PHACTboost uses amino acid classes to utilize amino acid properties.
 
 
 # Variant Set Construction
