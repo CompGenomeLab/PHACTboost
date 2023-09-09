@@ -1,20 +1,13 @@
-load("/Users/nurdankuru/Desktop/PHACTboost/Train_gnomAD_Shared.RData")
 load("/Users/nurdankuru/Desktop/PHACTboost/Test_gnomAD_Shared.RData")
+load("/Users/nurdankuru/Desktop/PHACTboost/lightgbm_replication_1_prediction.RData")
+test <- cbind(prediction$test_prediction, test)
 
-all <- rbind(train, test)
-
-load("/Users/nurdankuru/Desktop/PHACTboost/dbNSFP_44a_TestSet.RData")
+load("/Users/nurdankuru/dbNSFP_44a_TestSet.RData")
 dbnsfp <- dbnsfp_testset
 
 s <- colnames(dbnsfp)
 tools <- colnames(dbnsfp)[grep("_rankscore", colnames(dbnsfp))]
 check <- dbnsfp[,match(tools, colnames(dbnsfp))]
-
-tools_considering_AF <- c("MetaSVM_rankscore", "MetaLR_rankscore", "MetaRNN_rankscore",
-                          "BayesDel_addAF_rankscore", "BayesDel_noAF_rankscore", "M-CAP_rankscore",
-                          "MutPred_rankscore", "ClinPred_rankscore")
-
-check <- check[,-match(tools_considering_AF, colnames(check))]
 
 dis <- c()
 keep <- c()
