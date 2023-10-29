@@ -1,6 +1,9 @@
 # PHACTboost
 
-PHACTboost is a gradiatent boosting tree based classifier that combines PHACT scores with information from multiple sequence alignment, phylogenetic trees, and ancestral reconstruction. Our comprehensive experiments on 20,191 human proteins encompassing 219 million amino acid substitution  demonstrate that PHACTboost overpeforms 40 available pathogenicity predictors  including the recent ones such as EVE and CPT-1. 
+PHACTboost is a gradiatent boosting tree based classifier that combines PHACT scores with information from multiple sequence alignment, phylogenetic trees, and ancestral reconstruction. 
+
+The results of comprehensive experiments on carefully constructed sets of variants demonstrated that PHACTboost can outperform 40 prevalent pathogenicity predictors reported in the dbNSFP, including conventional tools, meta-predictors, and deep learning-based approaches as well as state-of-the-art tools, AlphaMissense, EVE, and CPT-1. The superiority of PHACTboost over these methods was particularly evident in case of hard variants for which different pathogenicity predictors offered conflicting results. We provide predictions of 219 million missense variants over 20,191 proteins. PHACTboost can improve our understanding of genetic diseases and facilitate more accurate diagnoses.![image](https://github.com/CompGenomeLab/PHACTboost/assets/68369488/76211e75-eb97-400e-8f02-c467413ed40b)
+
 
 # Input Data
 
@@ -9,7 +12,7 @@ PHACTboost uses [PHACT](https://github.com/CompGenomeLab/PHACT) scores and their
 
 # Variant Set Construction
 
-ClinVar (main data): https://ftp.ncbi.nlm.nih.gov/pub/clinvar/tab_delimited/archive/variant_summary_2023-02.txt.gz
+ClinVar (main data): variant_summary.txt dated 23.02.2023. (the closest version: https://ftp.ncbi.nlm.nih.gov/pub/clinvar/tab_delimited/archive/variant_summary_2023-02.txt.gz)
 
 gnomAD: https://gnomad.broadinstitute.org/downloads#v3
 
@@ -26,10 +29,11 @@ The GRCh38 coordinates reported in ClinVar, gnomAD and HSV are mapped to protein
 
 # Citing this work
 
+
 # Data availability
 All data obtained during this study is shared on the following url. 
 
-* Please see Publications/... folder to reproduce the figures in PHACTboost manuscript.
+* Please see [[https://github.com/CompGenomeLab/PHACTboost_manuscript](https://github.com/CompGenomeLab/PHACTboost_manuscript)  folder to reproduce the figures in PHACTboost manuscript.
 
 # Acknowledgement
 This work was supported by the Health Institutes of Turkey (TUSEB) (Project no: 4587 to O.A.) and EMBO Installation Grant (Project no: 4163 to O.A.) funded by the Scientific and Technological Research Council of Turkey (TÜBİTAK). Most of the numerical calculations reported in this paper were performed at the High Performance and Grid Computing Center (TRUBA resources) of TÜBITAK. The TOSUN cluster at Sabanci University was also used for computational analyses. We also want to thank Nehircan Özdemir for his art illustration of the PHACTboost approach.
