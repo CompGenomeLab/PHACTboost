@@ -32,7 +32,7 @@ The GRCh38 coordinates reported in ClinVar, gnomAD and HSV are mapped to protein
 # Data availability
 All data obtained during this study is shared on the following url. 
 
-* Please see [https://github.com/CompGenomeLab/PHACTboost_manuscript](https://github.com/CompGenomeLab/PHACTboost_manuscript)  folder to reproduce the figures in PHACTboost manuscript.
+* Please see [PHACTboost_manuscript](https://github.com/CompGenomeLab/PHACTboost_manuscript)  folder to reproduce the figures in PHACTboost manuscript.
 
 # Acknowledgement
 This work was supported by the Health Institutes of Turkey (TUSEB) (Project no: 4587 to O.A.) and EMBO Installation Grant (Project no: 4163 to O.A.) funded by the Scientific and Technological Research Council of Turkey (TÜBİTAK). Most of the numerical calculations reported in this paper were performed at the High Performance and Grid Computing Center (TRUBA resources) of TÜBITAK. The TOSUN cluster at Sabanci University was also used for computational analyses. We also want to thank Nehircan Özdemir for his art illustration of the PHACTboost approach.
