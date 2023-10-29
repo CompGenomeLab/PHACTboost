@@ -1,26 +1,19 @@
 library(lightgbm)
 library(AUC)
-source("./lgb_grid_cv.R")
+source("./lgb_grid_cv_18082022.R")
 
-load("Train_gnomAD_Shared.RData")
-load("Test_gnomAD_Shared.RData")
+load("TrainSet.RData")
+load("TestSet.RData")
 
-all_train_vars_AF_0.005_revstar_0 <- rbind(train, test)
-all_test_AF_0.01_revstar_1 <- test
+all_train <- train
+all_test <- test
 
 args <- commandArgs(trailingOnly = TRUE)
-replication <- 1
+replication <- args[[1]]
 
-phact_choice <- args[[2]]
-param_choice <- args[[3]]
-star_choice <- args[[4]]
-eliminate_circularity <- args[[5]]
-rpath <- args[[6]]
-if (eliminate_circularity == "circ3") {
-  result_path <- sprintf("./%s_%s_vars_%s_%s_%s", rpath, phact_choice, star_choice, param_choice, eliminate_circularity)
-} else{
-  result_path <- sprintf("./%s_%s_vars_%s_%s", rpath, phact_choice, star_choice, param_choice)
-}
+param_choice <- args[[2]]
+rpath <- args[[3]]
+result_path <- sprintf("./%s_%s_%s_%s", rpath, param_choice, replication)
 
 if(dir.exists(sprintf("%s", result_path)) == FALSE) {
   dir.create(sprintf("%s",result_path))
@@ -28,23 +21,19 @@ if(dir.exists(sprintf("%s", result_path)) == FALSE) {
 
 set.seed(1903 * replication)
 
-all_train <- all_train_vars_AF_0.005_revstar_0
-all_test <- all_test_AF_0.01_revstar_1
-
 y_train <- all_train$variant_info
-xx <- which(colnames(all_train)=="vars")
-X_train <- all_train[, -c(1:11, xx, grep("SIFT", colnames(all_train)))]
+el1 <- which(colnames(all_train)=="vars")
+X_train <- all_train[, -c(1:11, el1, grep("SIFT", colnames(all_train)))]
 X_train <- X_train[, (!grepl("wol", colnames(X_train)))]
 elims <- which(apply(X_train, 2, sd) == 0)
 X_train <- X_train[,-elims]
 
 y_test <- all_test$variant_info
-xx2 <- which(colnames(all_test)=="vars")
-X_test <- all_test[, -c(1:11, xx2, grep("SIFT", colnames(all_test)))]
+el2 <- which(colnames(all_test)=="vars")
+X_test <- all_test[, -c(1:11, el2, grep("SIFT", colnames(all_test)))]
 X_test <- X_test[, (!grepl("wol", colnames(X_test)))]
 X_test <- X_test[,-elims]
 
-print(colnames(X_train))
 parameters <- c("0.1", "0.5", "1", "2", "3",  "5", "mean", "median", "0", paste0("CountNodes_", c(1:5)), "0_MinNode_Mix", "0_MinNode_Mix2", "Equal", "max05_Gauss")
 if (param_choice  %in% parameters) {
   left_params <- parameters[parameters != param_choice]
@@ -380,5 +369,4 @@ prediction <- list(train_prediction = train_prediction, test_prediction = test_p
 result <- list(train_auroc = train_auroc, test_auroc = test_auroc)
 save("prediction", file = sprintf("%s/lightgbm_replication_%d_prediction.RData", result_path, replication))
 save("result", file = sprintf("%s/lightgbm_replication_%d_result.RData", result_path, replication))
-
 
