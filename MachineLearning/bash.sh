@@ -12,4 +12,4 @@
 
 module load r-4.1.0-gcc-9.2.0-wq6f22q 
 echo "======================================================================================"
-Rscript lgb_Final.R ${SLURM_ARRAY_TASK_ID} "PHACTboost_Result" "CountNodes_3"
+Rscript lgb_Final.R ${SLURM_ARRAY_TASK_ID} "CountNodes_3" "PHACTboost_Result" 
