@@ -1,7 +1,6 @@
 #!/usr/bin/env Rscript
 library(bio3d)
 args = commandArgs(trailingOnly=TRUE)
-uniprot_id <- args[2]
 
 aa_to_num <- function(aa) {
   amino_acids <- c("G", "A", "L", "M", "F", "W", "K", "Q", "E", "S", "P", "V", "I", "C", "Y", "H", "R", "N", "D", "T")
@@ -16,7 +15,7 @@ num_to_aa <- function(num) {
   return(aa)
 }
 
-compute_score <- function(file_fasta, output_name, pos_chosen, human_id) {
+compute_score <- function(file_fasta, output_name, folder_name) {
   # Read fasta file, MSA
   fasta <- read.fasta(file = file_fasta)
   msa <- fasta$ali
@@ -26,7 +25,7 @@ compute_score <- function(file_fasta, output_name, pos_chosen, human_id) {
   
   names_all <- row.names(msa)
   
-  h_name <- human_id
+  h_name <- output_name
   human_codeml <- names_all[grep(pattern = h_name, x = names_all, fixed = TRUE)]
   
   # Chosen positions (all or some)
@@ -64,7 +63,7 @@ compute_score <- function(file_fasta, output_name, pos_chosen, human_id) {
     k <- k + 2
   }
   
-  write.table(vect, quote = F, col.names = F, row.names = F, paste(output_name, "_masked_msa.fasta", sep = ""))
+  write.table(vect, quote = F, col.names = F, row.names = F, sprintf("%s/%s_masked_msa.fasta", folder_name, output_name))
   
 }
 
@@ -331,5 +330,5 @@ msa_masking <- function(msa, positions) {
   
 }
 
-compute_score(file_fasta=args[1], output_name=args[2], human_id = args[3])
+compute_score(file_fasta=args[1], output_name=args[2], folder_name = args[3])
 
