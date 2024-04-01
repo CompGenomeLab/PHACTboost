@@ -2,7 +2,7 @@
 
 ## Overview
 
-These Python scripts extract coding sequences from genomic data, find their genomic coordinates, exon, strand, chromosome information and translate these sequences to proteins, match them with canonical protein sequences. All possible single nucleotide substitutions are calculated and corresponding amino acids and protein positions are found. 
+These Python scripts extract coding sequences from genomic data, find their genomic coordinates, exon, strand, chromosome information and translate these sequences to proteins, match them with canonical protein sequences. All possible single nucleotide substitutions are calculated and corresponding amino acids and amino acid positions are found. 
 
 
 - **fasta_dict.py**: Generates a dictionary from a FASTA file, associating sequence headers with their corresponding sequences.
