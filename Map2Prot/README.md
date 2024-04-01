@@ -1,4 +1,3 @@
-# Genomic and Proteomic Analysis Toolkit
 
 ## Overview
 
