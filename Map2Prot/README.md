@@ -1,7 +1,7 @@
 
 ## Overview
 
-These Python scripts extract coding sequences from genomic data, find their genomic coordinates, exon, strand, chromosome information and translate these sequences to proteins, match them with canonical protein sequences. All possible single nucleotide substitutions are calculated and corresponding amino acids and amino acid positions are found. 
+These Python scripts extract coding sequences from genomic data, find their genomic coordinates, exon, strand, chromosome information and translate these sequences to proteins, match them with canonical protein sequences. All possible single nucleotide substitutions are calculated and corresponding amino acids and amino acid positions are found. Genomic coordinates, referance nucleotides and alternating nucleotides are mapped to corresponding amino acid positions, reference and alternating amino acids.
 
 
 - **fasta_dict.py**: Generates a dictionary from a FASTA file, associating sequence headers with their corresponding sequences.
@@ -13,6 +13,7 @@ These Python scripts extract coding sequences from genomic data, find their geno
 - **get_canonical_transcripts.py**: Matches translated protein sequences with canonical protein sequences, outputting a JSON file with transcripts whose translated proteins align with canonical sequences. Transcript id, exon, strand, chromosome, chromosome positions, protein id, protein sequences are stored in the JSON file. Additional JSON files for IDs not found and non-matching sequences are also generated.
 
 - **prot2transcript.py**: Calculates all possible single nucleotide substitutions for canonical transcripts, outputting a CSV file including genomic coordinates, amino acid positions, reference nucleotide, altered nucleotide, reference amino acid, altered amino acid etc
+- **get_alt_aa.py**: Maps genomic coordinates, reference and alternating nucleotides to amino acid positions, reference amino acid, altered amino acid
 
 ## Workflow
 
