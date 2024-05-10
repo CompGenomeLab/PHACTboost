@@ -21,6 +21,16 @@ universal = {
     "GGU":"G", "GGC":"G", "GGA":"G", "GGG":"G"
     }
 
+def get_complementary(sequence):
+    # Dictionary to map each nucleotide to its complement
+    complement = {'A': 'T', 'T': 'A', 'C': 'G', 'G': 'C'}
+    
+    # Create the complementary sequence by replacing each nucleotide with its complement
+    complementary_sequence = ''.join(complement[nuc] for nuc in sequence)
+    
+    return complementary_sequence
+
+
 def longest_substring_divisible_by_3(s):
     remainder = len(s) % 3 
     length_divisible_by_three = len(s) - remainder 
@@ -37,10 +47,36 @@ def translate(codon):
 
     return aa
 
+# def calculate_cds_coordinates(gene_data):
+#     cds_coordinates = {}
+#     position_in_cds = 0
+
+#     cds_exons = gene_data['cds'] if gene_data['strand'] == '+' else list(reversed(gene_data['cds']))
+
+#     for exon in cds_exons:
+#         coordinates = list(map(int, exon['coordinates']))
+#         sequence = exon['seq']
+#         if gene_data['strand'] == '+':
+#             start_coordinate = coordinates[0]
+#             for i in range(len(sequence)):
+#                 cds_coordinates[position_in_cds + i + 1] = start_coordinate + i
+#         else:  # '-' strand, process from the higher coordinate to the lower
+#             start_coordinate = coordinates[0]
+#             for i in range(len(sequence)):
+#                 cds_coordinates[position_in_cds + i + 1] = start_coordinate - i
+
+#         position_in_cds += len(sequence)
+
+#     return cds_coordinates
+
+
 def calculate_cds_coordinates(gene_data):
     cds_coordinates = {}
-    position_in_cds = 0  
-    cds_exons = gene_data['cds'] if gene_data['strand'] == '+' else reversed(gene_data['cds'])
+    position_in_cds = 0
+
+    # Process exons in order provided; 'cds' list is not reversed.
+    cds_exons = gene_data['cds']
+
     for exon in cds_exons:
         coordinates = list(map(int, exon['coordinates']))
         sequence = exon['seq']
@@ -49,26 +85,44 @@ def calculate_cds_coordinates(gene_data):
             for i in range(len(sequence)):
                 cds_coordinates[position_in_cds + i + 1] = start_coordinate + i
         else:  # '-' strand
+            # Start from the end coordinate and decrement
             start_coordinate = coordinates[1]
             for i in range(len(sequence)):
                 cds_coordinates[position_in_cds + i + 1] = start_coordinate - i
 
-        position_in_cds += len(sequence)  
+        position_in_cds += len(sequence)
+    
     return cds_coordinates
+
+def get_complementary_nucleotide(nucleotide):
+    # Mapping nucleotides to their complements
+    complement = {'A': 'T', 'T': 'A', 'C': 'G', 'G': 'C'}
+    return complement[nucleotide]
 
 def get_alt(cds, gene_data):
     subs_dict = {}
     cds_coordinates = calculate_cds_coordinates(gene_data)
+    strand = gene_data['strand']
+
     for i in range(0, len(cds), 3):
         codon = cds[i:i+3]
+        codon = codon.upper()
         ref_aa = translate(codon)
+        
         if len(codon) == 3:
             for j in range(3):
                 ref_nuc = codon[j]
+                # Complement the nucleotide if the strand is negative
+                if strand == '-':
+                    ref_nuc = get_complementary_nucleotide(ref_nuc)
+                
                 nuc_coordinate = cds_coordinates[i+j+1]
+                
                 for nuc in ["A", "T", "C", "G"]:
                     if ref_nuc != nuc:
-                        alt_codon = codon[:j] + nuc + codon[j+1:]
+                        # Also complement the substitution nucleotide if the strand is negative
+                        alt_nuc = get_complementary_nucleotide(nuc) if strand == '-' else nuc
+                        alt_codon = codon[:j] + alt_nuc + codon[j+1:]
                         alt_aa = translate(alt_codon)
                         aa_pos = (i // 3) + 1
                         key = (i//3, j, ref_nuc, nuc)
@@ -81,14 +135,17 @@ def get_alt(cds, gene_data):
                         
     return subs_dict
 
+
 file_path = 'all_canonical_transcripts.json'
 
 with open(file_path, 'r') as file:
     data = json.load(file)
 
+
 all_substitutions_dict = {}
 
 for transcript in data.keys():
+    #if transcript == "ENST00000304790" or transcript == "ENST00000265441" or transcript == "ENST00000639785":
     all_substitutions_dict[transcript] = {}
     cds = ""
     exon_coordinates_dict = calculate_cds_coordinates(data[transcript])
@@ -103,7 +160,6 @@ for transcript in data.keys():
     all_substitutions_dict[transcript]['protein_id'] = protein_id
     all_substitutions_dict[transcript]['cds'] = cds
     all_substitutions_dict[transcript]['all_subs'] = subs_dict
-
 
 with open("all_substitutions.csv", 'w', newline='') as csvfile:
     writer = csv.writer(csvfile)
@@ -121,6 +177,8 @@ with open("all_substitutions.csv", 'w', newline='') as csvfile:
                             chan['ref_aa'],
                             chan['alt_aa']])
            
+
+
 
 
 
