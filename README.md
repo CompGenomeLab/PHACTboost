@@ -27,6 +27,11 @@ https://ftp.ncbi.nlm.nih.gov/pub/clinvar/tab_delimited/archive/2015 (11 files)
 The GRCh38 coordinates reported in ClinVar, gnomAD and HSV are mapped to protein positions by using the pipeline reported in Map2Prot folder.
 
 # Citing this work
+Dereli, O.#, Kuru, N.#, Akkoyun, E., Bircan, A., Tastan, O.\*, & Adebali, O.\* (2024).  
+*Molecular Biology and Evolution*, msae136.  
+\# Co-first authors  
+\* Co-corresponding authors 
+https://academic.oup.com/mbe/advance-article/doi/10.1093/molbev/msae136/7700170
 
 
 # Data availability
