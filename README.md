@@ -4,11 +4,35 @@ PHACTboost is a gradiatent boosting tree based classifier that combines PHACT sc
 
 The results of comprehensive experiments on carefully constructed sets of variants demonstrated that PHACTboost can outperform 40 prevalent pathogenicity predictors reported in the dbNSFP, including conventional tools, meta-predictors, and deep learning-based approaches as well as state-of-the-art tools, AlphaMissense, EVE, and CPT-1. The superiority of PHACTboost over these methods was particularly evident in case of hard variants for which different pathogenicity predictors offered conflicting results. We provide predictions of 219 million missense variants over 20,191 proteins. PHACTboost can improve our understanding of genetic diseases and facilitate more accurate diagnoses.
 
+## Quick Start
+
+PHACTboost offers two usage modes:
+
+### Option 1: Use Pre-trained Model (Recommended)
+For making predictions on new variants using our pre-trained model:
+```bash
+# Go to prediction directory
+cd PHACTboost_Prediction/
+Rscript PHACTboost_Prediction.R <ids> <codon_info_path> <train_path>
+```
+
+### Option 2: Train Your Own Model
+For training PHACTboost from scratch:
+```bash
+# Go to machine learning directory
+cd MachineLearning/
+sbatch bash.sh
+# or run directly
+Rscript lgb.R <replication> <parameter_choice> <result_path>
+```
+
 # Input Data
 
 PHACTboost uses [PHACT](https://github.com/CompGenomeLab/PHACT) scores and their different versions (or related components) as features. The other input feature groups consist of gene and sequence position-specific features from the phylogenetic tree, ancestral probability distributions to integrate the structural properties of the phylogenetic tree and MSA-based frequency calculations as input features. Additionally, PHACTboost uses amino acid classes to utilize amino acid properties.
 
 # PHACTboost Feature Construction Pipeline
+
+This section describes how to construct PHACT features from scratch. This is required for both training new models and making predictions.
 
 ## Requirements
 
@@ -87,6 +111,55 @@ Rscript get_input_features.R <uniprot_id> <masked_msa_file>
 - `masked_msa_file`: Masked MSA file from Step 1
 
 **Output**: `input_features/<uniprot_id>.RData` - Final feature matrix
+
+# Model Training (MachineLearning/)
+
+This section describes how to train PHACTboost models from scratch.
+
+## Requirements
+```r
+library(lightgbm)
+library(AUC)
+```
+
+## Usage
+```bash
+# Submit SLURM job
+sbatch bash.sh
+
+# Or run directly
+Rscript lgb.R <replication> <parameter_choice> <result_path>
+```
+
+## Output
+- Trained LightGBM model (`.txt` format)
+- Cross-validation results
+- Best hyperparameters
+- Performance metrics (train/test AUC)
+
+# Prediction (PHACTboost_Prediction/)
+
+This section describes how to make predictions using the pre-trained PHACTboost model.
+
+## Requirements
+```r
+library(lightgbm)
+library(AUC)
+library(readxl)
+```
+
+## Usage
+```bash
+Rscript PHACTboost_Prediction.R <ids> <codon_info_path> <train_path>
+```
+
+## Parameters
+- `ids`: Vector of UniProt IDs to predict
+- `codon_info_path`: Path to codon information file (`.xlsx`)
+- `train_path`: Path to training data for feature scaling reference
+
+## Output
+- `PHACTboost_<id>.RData`: Prediction results with PHACTboost scores
 
 # Variant Set Construction
 
