@@ -1,16 +1,9 @@
-calculate_ml_features <- function(ps, version, x, msa, type_aas, human_codeml, tr_org, tree_info, num_nodes, num_leaves, total_pos, human_plc, node_human, nodes_raxml, chosen_leaves, chosen_nodes2, d_n, d_l, aa_scales, nodes_conn, leaves_conn) {
+calculate_ml_features <- function(ps, x, msa, type_aas, human_codeml, tr_org, tree_info, num_nodes, num_leaves, total_pos, human_plc, node_human, nodes_raxml, chosen_leaves, chosen_nodes2, d_n, d_l, aa_scales, nodes_conn, leaves_conn) {
   position <- ps
   
-  version <- 0
-  #version <- as.numeric(version)
-  
   aa_scales_org <- aa_scales
-  if (version==1){
-    aa_scales <- aa_scales[match(num_to_aa(1:20), unlist(aa_scales[,1])),]
-  } else {
-    aa_scales <- aa_scales[match(num_to_aa(1:20), unlist(aa_scales[,1])),]
-    aa_scales[,2:27] <- scale(aa_scales[,2:27])
-  }
+  aa_scales <- aa_scales[match(num_to_aa(1:20), unlist(aa_scales[,1])),]
+  aa_scales[,2:27] <- scale(aa_scales[,2:27])
   
   num_nodes_prev <- num_nodes
   num_leaves_prev <- num_leaves
@@ -159,7 +152,7 @@ calculate_ml_features <- function(ps, version, x, msa, type_aas, human_codeml, t
   gaps <- which(position_num == 21)
   
   parameter <- "CountNodes_3"
-  weights <- weight_fnc(d_n, d_l, human_plc, parameter, leaves_conn, nodes_conn, mxx) # Updated with related parameters
+  weights <- weight_fnc(d_n, d_l, human_plc, parameter, leaves_conn, nodes_conn)
   weight_leaf <- weights[1:num_leaves]
   weight_node <- tail(weights,num_nodes)
   

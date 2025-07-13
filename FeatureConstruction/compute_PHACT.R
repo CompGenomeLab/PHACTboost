@@ -1,4 +1,4 @@
-position_score <- function(ps, x, msa, trim_final, human_id, names_all, tr_org, num_nodes, num_leaves, tree_info, num_nodes_prev, nodes_raxml_prev, num_leaves_prev, total_pos, human_plc, node_human, nodes_raxml, human_leaf_len, dist_node, dist_leaf, parameters) {
+position_score <- function(ps, x, msa, human_id, names_all, tr_org, num_nodes, num_leaves, tree_info, num_nodes_prev, nodes_raxml_prev, num_leaves_prev, total_pos, human_plc, node_human, nodes_raxml, human_leaf_len, dist_node, dist_leaf, parameters) {
   position <- ps
   #print(ps)  
   b1 <- position + total_pos*(0:(num_nodes-1))
@@ -196,7 +196,7 @@ position_score <- function(ps, x, msa, trim_final, human_id, names_all, tr_org, 
       pl <- 1
       ################## weights
       for (parameter in parameters) {
-        weights <- weight_fnc(d_n, d_l, human_plc, parameter, leaves_conn, nodes_conn, mxx) # Updated with related parameters
+        weights <- weight_fnc(d_n, d_l, human_plc, parameter, leaves_conn, nodes_conn)
         weight_leaf <- weights[1:num_leaves]
         weight_node <- tail(weights,num_nodes)
         

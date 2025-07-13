@@ -6,8 +6,9 @@ library(Peptides)
 
 args <- commandArgs(trailingOnly = TRUE)
 uniprot_id <- args[1]
+alignment_path <- args[2]
 
-save_path <- "input_features_New"
+save_path <- "input_features"
 
 if (dir.exists(sprintf("%s", save_path)) == FALSE) {
   dir.create(sprintf("%s", save_path)) 
@@ -26,7 +27,6 @@ aa_sift <- "  A   B   C   D   E   F   G   H   I   K   L   M   N   P   Q   R   S 
 aa_phact <- c("G", "A", "L", "M", "F", "W", "K", "Q", "E", "S", "P", "V", "I", "C", "Y", "H", "R", "N", "D", "T")
 
 ids <- uniprot_id
-#ids <- list.files("MLFeats")
 
 for (id in ids){
   print(id)
@@ -37,7 +37,7 @@ for (id in ids){
   load(sprintf("%s/%s/%s_protscale_scores.RData", data_pathh, id, id))
   load(sprintf("%s/%s/%s_protein_level_features.RData", data_pathh, id, id))
   
-  file_fasta <- paste("/cta/groups/adebali/msa_masking_nurdan/Alignments/", id, "_MaskedMSA.fasta", sep = "")
+  file_fasta <- paste(alignment_path, id, "_MaskedMSA.fasta", sep = "")
   # Read fasta file, MSA
   fasta <- read.fasta(file = file_fasta)
   msa <- fasta$ali

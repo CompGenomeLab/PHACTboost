@@ -1,4 +1,4 @@
-weight_fnc <- function(d_n, d_l, human_plc, parameter, leaves_conn, nodes_conn, mxx) {
+weight_fnc <- function(d_n, d_l, human_plc, parameter, leaves_conn, nodes_conn) {
   # print(parameter)
   if (parameter=="0"){
     d_l_n <- d_l[-human_plc]

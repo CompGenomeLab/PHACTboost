@@ -11,9 +11,8 @@ source("./compute_weight.R")
 
 args = commandArgs(trailingOnly=TRUE)
 
-uniprot_id <- args[4]
-save_path <- args[7]
-masking_path <- args[8]
+uniprot_id <- args[6]
+save_path <- args[9]
 
 if(dir.exists(sprintf("%s", save_path)) == FALSE) {
   dir.create(sprintf("%s",save_path))
@@ -36,7 +35,7 @@ num_to_aa <- function(num) {
   return(aa)
 }
 
-compute_score <- function(file_nwk, file_rst, file_fasta, output_name, human_id, pos_chosen, parameters) {
+compute_score <- function(file_nwk, file_rst, file_fasta, file_log, file_iqtree, output_name, human_id, pos_chosen, parameters, aa_scales_file) {
   
   # Read tree file
   tr_org <- read.tree(file_nwk)
@@ -157,7 +156,7 @@ compute_score <- function(file_nwk, file_rst, file_fasta, output_name, human_id,
   #########################################
   
   #########aa_scales
-  load("aa_scales.RData")
+  load(aa_scales_file)
   #########
   
   polarity_polar <- c("C", "D", "E", "H", "K", "N", "Q", "R", "S", "T", "Y")
@@ -207,7 +206,7 @@ compute_score <- function(file_nwk, file_rst, file_fasta, output_name, human_id,
   
   parameters <- unlist(str_split(parameters, pattern = ","))
   
-  score_norm <- t(mapply(function(ps){position_score(ps, x, msa, trim_final, human_id, names_all, tr_org, num_nodes, num_leaves, tree_info, num_nodes, nodes_raxml, num_leaves, total_pos, human_plc, node_human, nodes_raxml, human_leaf_len, dist_node, dist_leaf, parameters)}, rep(positions)))
+  score_norm <- t(mapply(function(ps){position_score(ps, x, msa, human_id, names_all, tr_org, num_nodes, num_leaves, tree_info, num_nodes, nodes_raxml, num_leaves, total_pos, human_plc, node_human, nodes_raxml, human_leaf_len, dist_node, dist_leaf, parameters)}, rep(positions)))
   
   pl <- 1
   scores <- list()
@@ -265,7 +264,7 @@ compute_score <- function(file_nwk, file_rst, file_fasta, output_name, human_id,
   }
   protscale_scores <- list(scores_aver = protscale_scores_aver, scores_tol = protscale_scores_tol, scores_wo_phact = protscale_scores_wo_phact)
   
-  log_file <- readLines(sprintf("%s/%s/%s.log", masking_path, uniprot_id, uniprot_id))
+  log_file <- readLines(file_log)
   
   total_tree_length <- log_file[grep("Total tree length", log_file)]
   total_tree_length <- as.numeric(str_split(total_tree_length, ":", simplify = T)[2])
@@ -287,7 +286,7 @@ compute_score <- function(file_nwk, file_rst, file_fasta, output_name, human_id,
   total_iter <- log_file[grep("Total number of iterations", log_file)]
   total_iter <- as.numeric(str_split(total_iter, ":", simplify = T)[2])
   
-  iqtree_file <- readLines(sprintf("%s/%s/%s.iqtree", masking_path, uniprot_id, uniprot_id))
+  iqtree_file <- readLines(file_iqtree)
   num_of_const_sites <- iqtree_file[grep("Number of constant sites", iqtree_file)]
   num_of_const_sites <- str_split(num_of_const_sites, ":", simplify = T)[2]
   num_of_const_sites <- as.numeric(substr(num_of_const_sites, 1, (which(strsplit(num_of_const_sites, "")[[1]]=="(")-1)))
@@ -360,5 +359,5 @@ compute_score <- function(file_nwk, file_rst, file_fasta, output_name, human_id,
 }
 
 
-compute_score(file_nwk=args[1],file_rst=args[2],file_fasta=args[3], output_name=args[4],human_id=args[5],'all', parameters = args[6], path=args[8])
+compute_score(file_nwk=args[1],file_rst=args[2],file_fasta=args[3],file_log=args[4],file_iqtree=args[5], output_name=args[6],human_id=args[7],'all', parameters = args[8], aa_scales_file=args[10])
 
