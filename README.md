@@ -16,6 +16,11 @@ cd PHACTboost_Prediction/
 Rscript PHACTboost_Prediction.R <ids> <codon_info_path> <train_path>
 ```
 
+**Parameters:**
+- `ids`: Vector of UniProt IDs to predict
+- `codon_info_path`: Path to codon information file (`.xlsx`)
+- `train_path`: Path to training data for feature scaling reference
+
 ### Option 2: Train Your Own Model
 For training PHACTboost from scratch:
 ```bash
@@ -25,6 +30,11 @@ sbatch bash.sh
 # or run directly
 Rscript lgb.R <replication> <parameter_choice> <result_path>
 ```
+
+**Parameters:**
+- `replication`: Replication number for reproducibility
+- `parameter_choice`: PHACT parameter choice (e.g., "CountNodes_3")
+- `result_path`: Directory to save results
 
 ## Input Data
 
@@ -195,5 +205,3 @@ The entire prediction scores for PHACTboost and PHACT are also made available at
 
 ## Acknowledgement
 This work was supported by the Health Institutes of Turkey (TUSEB) (Project no: 4587 to O.A.) and EMBO Installation Grant (Project no: 4163 to O.A.) funded by the Scientific and Technological Research Council of Turkey (TÜBİTAK). Most of the numerical calculations reported in this paper were performed at the High Performance and Grid Computing Center (TRUBA resources) of TÜBİTAK. The TOSUN cluster at Sabanci University was also used for computational analyses. We also want to thank Nehircan Özdemir for his art illustration of the PHACTboost approach.
-
-
