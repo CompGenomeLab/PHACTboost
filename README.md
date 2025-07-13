@@ -115,14 +115,17 @@ Rscript Main.R <tree_file> <ancestral_probs_file> <masked_msa_file> <log_file> <
 
 **Usage**:
 ```bash
-Rscript get_input_features.R <uniprot_id> <masked_msa_file>
+Rscript get_input_features.R <uniprot_id> <masked_msa_file> <data_path> <save_path> [aa_scales_path]
 ```
 
 **Parameters**:
 - `uniprot_id`: UniProt identifier
 - `masked_msa_file`: Masked MSA file from Step 1
+- `data_path`: Path to directory containing ML features (from Step 2)
+- `save_path`: Directory to save output features (default: `input_features`)
+- `aa_scales_path`: Path to amino acid scales file (default: `Data/aa_scales.RData`)
 
-**Output**: `input_features/<uniprot_id>.RData` - Final feature matrix
+**Output**: `<save_path>/<uniprot_id>.RData` - Final feature matrix
 
 ## Model Training (MachineLearning/)
 
