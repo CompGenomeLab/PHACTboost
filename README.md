@@ -102,6 +102,7 @@ iqtree2 -s ${masked_fasta} -te ${file_nwk} -m Data/vals.txt-asr --prefix ${id}_m
 - `${id}_masked.state`: Ancestral probabilities file (needed for Step 2)
 - `${id}_masked.treefile`: Updated phylogenetic tree
 - `${id}_masked.iqtree`: IQTREE output file (needed for Step 2)
+- `${id}_masked.log`: Log file from ASR analysis (needed for Step 2)
 
 
 ### Step 2: Feature Construction (`Main.R`)
@@ -116,7 +117,7 @@ Rscript Main.R <tree_file> <ancestral_probs_file> <masked_msa_file> <log_file> <
 - `tree_file`: Updated phylogenetic tree file from Step 1.5 (`.nwk`)
 - `ancestral_probs_file`: Ancestral probabilities file from Step 1.5 (`.state`)
 - `masked_msa_file`: Masked MSA file from Step 1
-- `log_file`: Log file from phylogenetic analysis (`.log`)
+- `log_file`: Log file from ASR analysis in Step 1.5 (`.log`)
 - `iqtree_file`: IQTREE output file from Step 1.5 (`.iqtree`)
 - `uniprot_id`: UniProt identifier
 - `human_id`: Human sequence identifier
@@ -232,3 +233,7 @@ The entire prediction scores for PHACTboost and PHACT are also made available at
 
 ## Acknowledgement
 This work was supported by the Health Institutes of Turkey (TUSEB) (Project no: 4587 to O.A.) and EMBO Installation Grant (Project no: 4163 to O.A.) funded by the Scientific and Technological Research Council of Turkey (TÜBİTAK). Most of the numerical calculations reported in this paper were performed at the High Performance and Grid Computing Center (TRUBA resources) of TÜBİTAK. The TOSUN cluster at Sabanci University was also used for computational analyses. We also want to thank Nehircan Özdemir for his art illustration of the PHACTboost approach.
+
+
+
+
