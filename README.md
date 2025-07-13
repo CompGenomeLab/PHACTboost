@@ -237,13 +237,18 @@ https://academic.oup.com/mbe/advance-article/doi/10.1093/molbev/msae136/7700170
 
 ## Data availability
 All data obtained during this study is shared as Supplementary Material. 
+
+### Training and Test Sets
+Complete feature matrices for training and testing PHACTboost models:
+- **Training Set**: [Download from Google Drive](https://drive.google.com/file/d/1e433sHlmEzwSes858FngJbo3kP-5xg18/view?usp=drive_link)
+- **Test Set**: [Download from Google Drive](https://drive.google.com/file/d/1LfHYKRu3ro5HyaGUeLb5qh9ajtMhEzYS/view?usp=drive_link)
+
+These datasets contain all computed features and are ready for model training and evaluation.
+
+### Additional Resources
 Please see the [PHACTboost_manuscript](https://github.com/CompGenomeLab/PHACTboost_manuscript) folder for training and test sets of PHACTboost, as well as to reproduce the figures in the PHACTboost manuscript.
 
 The entire prediction scores for PHACTboost and PHACT are also made available at [Zenodo](https://doi.org/10.5281/zenodo.11281312).
 
 ## Acknowledgement
 This work was supported by the Health Institutes of Turkey (TUSEB) (Project no: 4587 to O.A.) and EMBO Installation Grant (Project no: 4163 to O.A.) funded by the Scientific and Technological Research Council of Turkey (TÜBİTAK). Most of the numerical calculations reported in this paper were performed at the High Performance and Grid Computing Center (TRUBA resources) of TÜBİTAK. The TOSUN cluster at Sabanci University was also used for computational analyses. We also want to thank Nehircan Özdemir for his art illustration of the PHACTboost approach.
-
-
-
-
