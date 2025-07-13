@@ -1,3 +1,5 @@
+rm(list=ls())
+
 library(lightgbm)
 library(AUC)
 
@@ -5,6 +7,7 @@ ids <- args[1]
 codon_info_path <- args[2]
 train_path <- args[3]
 input_features_path <- args[4]
+final_model_path <- args[5]
 
 for (index in 1:length(ids)){
   id <- ids[index]
@@ -89,9 +92,10 @@ for (index in 1:length(ids)){
   X_test <- (X_test - matrix(train_info$center, nrow = nrow(X_test), ncol = ncol(X_test), byrow = TRUE)) / matrix(train_info$scale, nrow = nrow(X_test), ncol = ncol(X_test), byrow = TRUE)
   colnames(X_test) <- train_info$features
   
-  state <- lgb.load("/Users/nurdankuru/Desktop/PHACTboost_August/PHACTboost_GnomADSHARED_TRAIN_with_phact_vars_with_0_CountNodes_3/lightgbm_replication_1_model.txt")
+  state <- lgb.load(final_model_path)
   PhactBoost_Scores <- predict(state, as.matrix(X_test), params = list(predict_disable_shape_check=T))
   data <- cbind(PhactBoost_Scores, data)
 
   save(data, file = sprintf("PHACTboost_%s.RData", id))
 }
+
