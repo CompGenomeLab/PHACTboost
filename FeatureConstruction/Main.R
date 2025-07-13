@@ -9,11 +9,11 @@ source("./compute_PHACT.R")
 source("./compute_input_features.R")
 source("./compute_weight.R")
 
-masking_path <- "/cta/groups/adebali/phact_data_nurdan/ASR_NoLG_FreeRate"
 args = commandArgs(trailingOnly=TRUE)
 
 uniprot_id <- args[4]
 save_path <- args[7]
+masking_path <- args[8]
 
 if(dir.exists(sprintf("%s", save_path)) == FALSE) {
   dir.create(sprintf("%s",save_path))
@@ -360,5 +360,5 @@ compute_score <- function(file_nwk, file_rst, file_fasta, output_name, human_id,
 }
 
 
-compute_score(file_nwk=args[1],file_rst=args[2],file_fasta=args[3], output_name=args[4],human_id=args[5],'all', parameters = args[6])
+compute_score(file_nwk=args[1],file_rst=args[2],file_fasta=args[3], output_name=args[4],human_id=args[5],'all', parameters = args[6], path=args[8])
 
