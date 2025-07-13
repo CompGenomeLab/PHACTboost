@@ -8,6 +8,85 @@ The results of comprehensive experiments on carefully constructed sets of varian
 
 PHACTboost uses [PHACT](https://github.com/CompGenomeLab/PHACT) scores and their different versions (or related components) as features. The other input feature groups consist of gene and sequence position-specific features from the phylogenetic tree, ancestral probability distributions to integrate the structural properties of the phylogenetic tree and MSA-based frequency calculations as input features. Additionally, PHACTboost uses amino acid classes to utilize amino acid properties.
 
+# PHACT Feature Construction Pipeline
+
+## Requirements
+
+### R Packages
+```r
+library(ape)
+library(tidytree)
+library(stringr)
+library(dplyr)
+library(bio3d)
+library(Peptides)
+library(Biostrings)
+```
+
+### Input Files
+- Phylogenetic tree file (`.nwk` format)
+- Ancestral probabilities file (`.state` format)
+- Multiple sequence alignment (FASTA format)
+- Log file from phylogenetic analysis
+- IQTREE output file (`.iqtree`)
+- Amino acid scales file (`Data/aa_scales.RData`)
+
+## Pipeline Steps
+
+### Step 1: MSA Masking (`MSA_Masking.R`)
+
+**Usage**:
+```bash
+Rscript MSA_Masking.R <input_fasta> <uniprot_id> <output_folder>
+```
+
+**Parameters**:
+- `input_fasta`: Raw FASTA file with protein sequences
+- `uniprot_id`: UniProt identifier for the protein
+- `output_folder`: Directory to save masked MSA
+
+**Output**: Masked MSA file (`*_masked_msa.fasta`)
+
+
+### Step 2: Feature Construction (`Main.R`)
+
+
+**Usage**:
+```bash
+Rscript Main.R <tree_file> <ancestral_probs_file> <masked_msa_file> <log_file> <iqtree_file> <uniprot_id> <human_id> <parameters> <save_path> <aa_scales_file>
+```
+
+**Parameters**:
+- `tree_file`: Phylogenetic tree file (`.nwk`)
+- `ancestral_probs_file`: Ancestral probabilities file (`.state`)
+- `masked_msa_file`: Masked MSA file from Step 1
+- `log_file`: Log file from phylogenetic analysis (.log)
+- `iqtree_file`: IQTREE output file (.iqtree)
+- `uniprot_id`: UniProt identifier
+- `human_id`: Human sequence identifier
+- `parameters`: PHACT parameters (e.g., "CountNodes_3")
+- `save_path`: Directory to save output files
+- `aa_scales_file`: Amino acid scales file
+
+**Output Files**:
+- `*_scores.RData`: PHACT scores for each position
+- `*_ml_features.RData`: Machine learning features
+- `*_protscale_scores.RData`: Protein scale scores
+- `*_protein_level_features.RData`: Protein-level statistics
+
+
+### Step 3: Get Input Features (`get_input_features.R`)
+
+**Usage**:
+```bash
+Rscript get_input_features.R <uniprot_id> <masked_msa_file>
+```
+
+**Parameters**:
+- `uniprot_id`: UniProt identifier
+- `masked_msa_file`: Masked MSA file from Step 1
+
+**Output**: `input_features/<uniprot_id>.RData` - Final feature matrix
 
 # Variant Set Construction
 
