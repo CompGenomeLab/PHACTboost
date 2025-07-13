@@ -3,6 +3,8 @@ rm(list=ls())
 library(lightgbm)
 library(AUC)
 
+args <- commandArgs(trailingOnly = TRUE)
+
 ids <- args[1]
 codon_info_path <- args[2]
 train_path <- args[3]
@@ -98,4 +100,5 @@ for (index in 1:length(ids)){
 
   save(data, file = sprintf("PHACTboost_%s.RData", id))
 }
+
 
