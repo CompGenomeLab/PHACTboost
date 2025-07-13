@@ -60,8 +60,8 @@ Rscript Main.R <tree_file> <ancestral_probs_file> <masked_msa_file> <log_file> <
 - `tree_file`: Phylogenetic tree file (`.nwk`)
 - `ancestral_probs_file`: Ancestral probabilities file (`.state`)
 - `masked_msa_file`: Masked MSA file from Step 1
-- `log_file`: Log file from phylogenetic analysis (.log)
-- `iqtree_file`: IQTREE output file (.iqtree)
+- `log_file`: Log file from phylogenetic analysis (`.log`)
+- `iqtree_file`: IQTREE output file (`.iqtree`)
 - `uniprot_id`: UniProt identifier
 - `human_id`: Human sequence identifier
 - `parameters`: PHACT parameters (e.g., "CountNodes_3")
