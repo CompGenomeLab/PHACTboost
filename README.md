@@ -8,7 +8,7 @@ The results of comprehensive experiments on carefully constructed sets of varian
 
 PHACTboost uses [PHACT](https://github.com/CompGenomeLab/PHACT) scores and their different versions (or related components) as features. The other input feature groups consist of gene and sequence position-specific features from the phylogenetic tree, ancestral probability distributions to integrate the structural properties of the phylogenetic tree and MSA-based frequency calculations as input features. Additionally, PHACTboost uses amino acid classes to utilize amino acid properties.
 
-# PHACT Feature Construction Pipeline
+# PHACTboost Feature Construction Pipeline
 
 ## Requirements
 
