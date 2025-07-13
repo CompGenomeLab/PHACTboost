@@ -13,13 +13,15 @@ For making predictions on new variants using our pre-trained model:
 ```bash
 # Go to prediction directory
 cd PHACTboost_Prediction/
-Rscript PHACTboost_Prediction.R <ids> <codon_info_path> <train_path>
+Rscript PHACTboost_Prediction.R <ids> <codon_info_path> <train_path> <input_features_path> <final_model_path>
 ```
 
 **Parameters:**
 - `ids`: Vector of UniProt IDs to predict
 - `codon_info_path`: Path to codon information file (`.xlsx`)
 - `train_path`: Path to training data for feature scaling reference
+- `input_features_path`: Path to directory containing input features (`.RData` files)
+- `final_model_path`: Path to the trained LightGBM model (`.txt` file)
 
 ### Option 2: Train Your Own Model
 For training PHACTboost from scratch:
@@ -160,13 +162,15 @@ library(readxl)
 
 ## Usage
 ```bash
-Rscript PHACTboost_Prediction.R <ids> <codon_info_path> <train_path>
+Rscript PHACTboost_Prediction.R <ids> <codon_info_path> <train_path> <input_features_path> <final_model_path>
 ```
 
 ## Parameters
 - `ids`: Vector of UniProt IDs to predict
 - `codon_info_path`: Path to codon information file (`.xlsx`)
 - `train_path`: Path to training data for feature scaling reference
+- `input_features_path`: Path to directory containing input features (`.RData` files)
+- `final_model_path`: Path to the trained LightGBM model (`.txt` file)
 
 ## Output
 - `PHACTboost_<id>.RData`: Prediction results with PHACTboost scores
