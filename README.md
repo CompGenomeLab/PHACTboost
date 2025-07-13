@@ -83,6 +83,26 @@ Rscript MSA_Masking.R <input_fasta> <uniprot_id> <output_folder>
 
 **Output**: Masked MSA file (`*_masked_msa.fasta`)
 
+### Step 1.5: Re-run Ancestral State Reconstruction (ASR)
+
+**Important**: After masking the MSA, you need to re-run the ancestral state reconstruction because the masked alignment changes the phylogenetic tree structure.
+
+**Usage**:
+```bash
+iqtree2 -s ${masked_fasta} -te ${file_nwk} -m Data/vals.txt-asr --prefix ${id}_masked --safe
+```
+
+**Parameters**:
+- `${masked_fasta}`: Masked MSA file from Step 1
+- `${file_nwk}`: Original phylogenetic tree file (`.nwk`)
+- `${id}`: UniProt identifier
+- `Data/vals.txt-asr`: Amino acid substitution model for ASR
+
+**Output**: 
+- `${id}_masked.state`: Ancestral probabilities file (needed for Step 2)
+- `${id}_masked.treefile`: Updated phylogenetic tree
+- `${id}_masked.iqtree`: IQTREE output file (needed for Step 2)
+
 
 ### Step 2: Feature Construction (`Main.R`)
 
@@ -93,11 +113,11 @@ Rscript Main.R <tree_file> <ancestral_probs_file> <masked_msa_file> <log_file> <
 ```
 
 **Parameters**:
-- `tree_file`: Phylogenetic tree file (`.nwk`)
-- `ancestral_probs_file`: Ancestral probabilities file (`.state`)
+- `tree_file`: Updated phylogenetic tree file from Step 1.5 (`.nwk`)
+- `ancestral_probs_file`: Ancestral probabilities file from Step 1.5 (`.state`)
 - `masked_msa_file`: Masked MSA file from Step 1
 - `log_file`: Log file from phylogenetic analysis (`.log`)
-- `iqtree_file`: IQTREE output file (`.iqtree`)
+- `iqtree_file`: IQTREE output file from Step 1.5 (`.iqtree`)
 - `uniprot_id`: UniProt identifier
 - `human_id`: Human sequence identifier
 - `parameters`: PHACT parameters (e.g., "CountNodes_3")
