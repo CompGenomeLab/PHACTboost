@@ -26,11 +26,11 @@ sbatch bash.sh
 Rscript lgb.R <replication> <parameter_choice> <result_path>
 ```
 
-# Input Data
+## Input Data
 
 PHACTboost uses [PHACT](https://github.com/CompGenomeLab/PHACT) scores and their different versions (or related components) as features. The other input feature groups consist of gene and sequence position-specific features from the phylogenetic tree, ancestral probability distributions to integrate the structural properties of the phylogenetic tree and MSA-based frequency calculations as input features. Additionally, PHACTboost uses amino acid classes to utilize amino acid properties.
 
-# PHACTboost Feature Construction Pipeline
+## PHACTboost Feature Construction Pipeline
 
 This section describes how to construct PHACT features from scratch. This is required for both training new models and making predictions.
 
@@ -112,7 +112,7 @@ Rscript get_input_features.R <uniprot_id> <masked_msa_file>
 
 **Output**: `input_features/<uniprot_id>.RData` - Final feature matrix
 
-# Model Training (MachineLearning/)
+## Model Training (MachineLearning/)
 
 This section describes how to train PHACTboost models from scratch.
 
@@ -137,7 +137,7 @@ Rscript lgb.R <replication> <parameter_choice> <result_path>
 - Best hyperparameters
 - Performance metrics (train/test AUC)
 
-# Prediction (PHACTboost_Prediction/)
+## Prediction (PHACTboost_Prediction/)
 
 This section describes how to make predictions using the pre-trained PHACTboost model.
 
@@ -161,7 +161,7 @@ Rscript PHACTboost_Prediction.R <ids> <codon_info_path> <train_path>
 ## Output
 - `PHACTboost_<id>.RData`: Prediction results with PHACTboost scores
 
-# Variant Set Construction
+## Variant Set Construction
 
 ClinVar (main data): variant_summary.txt dated 23.02.2023. (the closest version: https://ftp.ncbi.nlm.nih.gov/pub/clinvar/tab_delimited/archive/variant_summary_2023-02.txt.gz)
 
@@ -178,7 +178,7 @@ https://ftp.ncbi.nlm.nih.gov/pub/clinvar/tab_delimited/archive/2015 (11 files)
 
 The GRCh38 coordinates reported in ClinVar, gnomAD and HSV are mapped to protein positions by using the pipeline reported in Map2Prot folder.
 
-# Citing this work
+## Citing this work
 Dereli, O.\*, Kuru, N.\*, Akkoyun, E., Bircan, A., Tastan, O.#, & Adebali, O.# (2024).  
 *Molecular Biology and Evolution*, msae136.  
 \* Co-first authors  
@@ -187,11 +187,13 @@ Dereli, O.\*, Kuru, N.\*, Akkoyun, E., Bircan, A., Tastan, O.#, & Adebali, O.# (
 https://academic.oup.com/mbe/advance-article/doi/10.1093/molbev/msae136/7700170
 
 
-# Data availability
+## Data availability
 All data obtained during this study is shared as Supplementary Material. 
 Please see the [PHACTboost_manuscript](https://github.com/CompGenomeLab/PHACTboost_manuscript) folder for training and test sets of PHACTboost, as well as to reproduce the figures in the PHACTboost manuscript.
 
 The entire prediction scores for PHACTboost and PHACT are also made available at [Zenodo](https://doi.org/10.5281/zenodo.11281312).
 
-# Acknowledgement
+## Acknowledgement
 This work was supported by the Health Institutes of Turkey (TUSEB) (Project no: 4587 to O.A.) and EMBO Installation Grant (Project no: 4163 to O.A.) funded by the Scientific and Technological Research Council of Turkey (TÜBİTAK). Most of the numerical calculations reported in this paper were performed at the High Performance and Grid Computing Center (TRUBA resources) of TÜBİTAK. The TOSUN cluster at Sabanci University was also used for computational analyses. We also want to thank Nehircan Özdemir for his art illustration of the PHACTboost approach.
+
+
