@@ -10,6 +10,11 @@ PHACTboost offers two usage modes:
 
 ### Option 1: Use Pre-trained Model (Recommended)
 For making predictions on new variants using our pre-trained model:
+
+**Prerequisites:**
+1. Download the training data from [Google Drive](https://drive.google.com/file/d/1e433sHlmEzwSes858FngJbo3kP-5xg18/view?usp=drive_link)
+2. Place the downloaded training data in the `Data/` directory
+
 ```bash
 # Go to prediction directory
 cd PHACTboost_Prediction/
@@ -66,6 +71,11 @@ library(Biostrings)
 - Log file from phylogenetic analysis
 - IQTREE output file (`.iqtree`)
 - Amino acid scales file (`Data/aa_scales.RData`)
+
+### Training Data
+Due to size constraints, the training data is hosted externally:
+- **Training Data**: [Download from Google Drive](https://drive.google.com/file/d/1e433sHlmEzwSes858FngJbo3kP-5xg18/view?usp=drive_link)
+- Place the downloaded training data in the `Data/` directory
 
 ## Pipeline Steps
 
