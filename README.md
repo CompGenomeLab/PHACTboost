@@ -25,7 +25,7 @@ Rscript PHACTboost_Prediction.R <ids> <codon_info_path> <train_path> <input_feat
 - `ids`: Vector of UniProt IDs to predict
 - `codon_info_path`: Path to codon information file (`.xlsx`) (default: `Data/Codon.xlsx`)
 - `train_path`: Path to training data for feature scaling reference (default: `Data/TrainingSet.RData`)
-- `input_features_path`: Path to directory containing input features (`.RData` files)
+- `input_features_path`: Path to directory containing input features (`.RData` files) for the specific positions/variants you want to predict
 - `final_model_path`: Path to the trained LightGBM model (default: `FinalModel/PHACTboost_model.txt`)
 
 ### Option 2: Train Your Own Model
@@ -66,10 +66,7 @@ library(Biostrings)
 
 ### Input Files
 - Phylogenetic tree file (`.nwk` format)
-- Ancestral probabilities file (`.state` format)
 - Multiple sequence alignment (FASTA format)
-- Log file from phylogenetic analysis
-- IQTREE output file (`.iqtree`)
 - Amino acid scales file (`Data/aa_scales.RData`)
 
 ### Training Data
@@ -112,7 +109,7 @@ iqtree2 -s ${masked_fasta} -te ${file_nwk} -m Data/vals.txt-asr --prefix ${id}_m
 - `${id}_masked.state`: Ancestral probabilities file (needed for Step 2)
 - `${id}_masked.treefile`: Updated phylogenetic tree
 - `${id}_masked.iqtree`: IQTREE output file (needed for Step 2)
-- `${id}_masked.log`: Log file from ASR analysis (needed for Step 2)
+- `${id}_masked.log`: Log file (needed for Step 2)
 
 
 ### Step 2: Feature Construction (`Main.R`)
@@ -124,11 +121,11 @@ Rscript Main.R <tree_file> <ancestral_probs_file> <masked_msa_file> <log_file> <
 ```
 
 **Parameters**:
-- `tree_file`: Updated phylogenetic tree file from Step 1.5 (`.nwk`)
-- `ancestral_probs_file`: Ancestral probabilities file from Step 1.5 (`.state`)
+- `tree_file`: Updated phylogenetic tree file from ASR analysis in Step 1.5 (`.treefile`)
+- `ancestral_probs_file`: Ancestral probabilities file from ASR analysis in Step 1.5 (`.state`)
 - `masked_msa_file`: Masked MSA file from Step 1
 - `log_file`: Log file from ASR analysis in Step 1.5 (`.log`)
-- `iqtree_file`: IQTREE output file from Step 1.5 (`.iqtree`)
+- `iqtree_file`: IQTREE output file from ASR analysis in Step 1.5 (`.iqtree`)
 - `uniprot_id`: UniProt identifier
 - `human_id`: Human sequence identifier
 - `parameters`: PHACT parameters (e.g., "CountNodes_3")
@@ -203,7 +200,7 @@ Rscript PHACTboost_Prediction.R <ids> <codon_info_path> <train_path> <input_feat
 - `ids`: Vector of UniProt IDs to predict
 - `codon_info_path`: Path to codon information file (`.xlsx`) (default: `Data/Codon.xlsx`)
 - `train_path`: Path to training data for feature scaling reference (default: `Data/TrainingSet.RData`)
-- `input_features_path`: Path to directory containing input features (`.RData` files)
+- `input_features_path`: Path to directory containing input features (`.RData` files) for the specific positions/variants you want to predict
 - `final_model_path`: Path to the trained LightGBM model (default: `FinalModel/PHACTboost_model.txt`)
 
 ## Output
