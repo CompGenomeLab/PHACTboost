@@ -36,7 +36,7 @@ num_to_aa <- function(num) {
   return(aa)
 }
 
-compute_score <- function(file_nwk, file_rst, file_fasta, output_name, human_id, pos_chosen, parameters, version) {
+compute_score <- function(file_nwk, file_rst, file_fasta, output_name, human_id, pos_chosen, parameters) {
   
   # Read tree file
   tr_org <- read.tree(file_nwk)
@@ -246,7 +246,7 @@ compute_score <- function(file_nwk, file_rst, file_fasta, output_name, human_id,
   print("saving scores") 
   save("scores", file = sprintf("%s/%s/%s_scores.RData", save_path, output_name, output_name))
   
-  ml_features_prot_scale <- sapply(positions, function(ps){calculate_ml_features(ps, version, x, msa, type_aas, human_codeml, tr_org, tree_info, num_nodes, num_leaves, total_pos, human_plc, node_human, nodes_raxml, chosen_leaves, chosen_nodes2, d_n, d_l, aa_scales, nodes_conn, leaves_conn)})
+  ml_features_prot_scale <- sapply(positions, function(ps){calculate_ml_features(ps, x, msa, type_aas, human_codeml, tr_org, tree_info, num_nodes, num_leaves, total_pos, human_plc, node_human, nodes_raxml, chosen_leaves, chosen_nodes2, d_n, d_l, aa_scales, nodes_conn, leaves_conn)})
   ml_features <- ml_features_prot_scale[1,]
   protscale_scores <- ml_features_prot_scale[2,]
   scale_scores_wo_phact <- ml_features_prot_scale[3,]
@@ -360,5 +360,5 @@ compute_score <- function(file_nwk, file_rst, file_fasta, output_name, human_id,
 }
 
 
-compute_score(file_nwk=args[1],file_rst=args[2],file_fasta=args[3], output_name=args[4],human_id=args[5],'all', parameters = args[6], version = args[8])
+compute_score(file_nwk=args[1],file_rst=args[2],file_fasta=args[3], output_name=args[4],human_id=args[5],'all', parameters = args[6])
 
