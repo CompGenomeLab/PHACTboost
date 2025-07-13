@@ -6,10 +6,12 @@ library(Peptides)
 
 args <- commandArgs(trailingOnly = TRUE)
 uniprot_id <- args[1]
-alignment_path <- args[2]
+file_fasta <- args[2]
+data_path <- args[3]
+save_path <- args[4]
+aa_scales_path <- args[5]
 
-save_path <- "input_features"
-
+# Create save directory if it doesn't exist
 if (dir.exists(sprintf("%s", save_path)) == FALSE) {
   dir.create(sprintf("%s", save_path)) 
 }
@@ -31,13 +33,12 @@ ids <- uniprot_id
 for (id in ids){
   print(id)
   
-  data_pathh <- sprintf("MLFeats")
-  load(sprintf("%s/%s/%s_scores.RData", data_pathh,  id, id))
-  load(sprintf("%s/%s/%s_ml_features.RData", data_pathh,  id, id))
-  load(sprintf("%s/%s/%s_protscale_scores.RData", data_pathh, id, id))
-  load(sprintf("%s/%s/%s_protein_level_features.RData", data_pathh, id, id))
+  # data_path is now passed as argument
+  load(sprintf("%s/%s/%s_scores.RData", data_path,  id, id))
+  load(sprintf("%s/%s/%s_ml_features.RData", data_path,  id, id))
+  load(sprintf("%s/%s/%s_protscale_scores.RData", data_path, id, id))
+  load(sprintf("%s/%s/%s_protein_level_features.RData", data_path, id, id))
   
-  file_fasta <- paste(alignment_path, id, "_MaskedMSA.fasta", sep = "")
   # Read fasta file, MSA
   fasta <- read.fasta(file = file_fasta)
   msa <- fasta$ali
@@ -351,7 +352,7 @@ for (id in ids){
   }
   
   amino_acids <- c("G", "A", "L", "M", "F", "W", "K", "Q", "E", "S", "P", "V", "I", "C", "Y", "H", "R", "N", "D", "T")
-  load("./aa_scales.RData")
+  load(aa_scales_path)
   aa_scales <- as.data.frame(aa_scales)
   rownames(aa_scales) <- aa_scales[,1]
   aa_scales_ref <- (aa_scales[data$Ref_AA, -1])
@@ -395,7 +396,4 @@ for (id in ids){
   
   save("data", file = sprintf("%s/%s.RData", save_path, id))
 }
-
-
-
 
