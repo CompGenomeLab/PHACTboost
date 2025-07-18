@@ -103,7 +103,7 @@ iqtree2 -s ${masked_fasta} -te ${file_nwk} -m Data/vals.txt+R4 -asr --prefix ${i
 - `${masked_fasta}`: Masked MSA file from Step 1
 - `${file_nwk}`: Original phylogenetic tree file (`.nwk`)
 - `${id}`: UniProt identifier
-- `Data/vals.txt-asr`: Amino acid substitution model for ASR
+- `Data/vals.txt`: Amino acid substitution model for ASR
 
 **Output**: 
 - `${id}_masked.state`: Ancestral probabilities file (needed for Step 2)
