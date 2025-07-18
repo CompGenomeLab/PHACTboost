@@ -96,7 +96,7 @@ Rscript MSA_Masking.R <input_fasta> <uniprot_id> <output_folder>
 
 **Usage**:
 ```bash
-iqtree2 -s ${masked_fasta} -te ${file_nwk} -m Data/vals.txt-asr --prefix ${id}_masked --safe
+iqtree2 -s ${masked_fasta} -te ${file_nwk} -m Data/vals.txt+R4 -asr --prefix ${id}_masked --safe
 ```
 
 **Parameters**:
