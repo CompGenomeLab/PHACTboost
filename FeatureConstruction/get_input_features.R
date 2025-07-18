@@ -159,8 +159,11 @@ for (id in ids){
       el_i <- c(el_i, which(data$Positions==p))
     }
   }
-  positions <- positions[-el_i]
-  data <- data[-el_i,]
+
+  if (length(el_i) > 0) {
+    positions <- positions[-el_i]
+    data <- data[-el_i, ]
+  }
   
   weighted_node_probs_ref <- t(as.matrix(sapply(1:length(positions), function(p){ml_features[[positions[p]]][["weighted_probs"]][,data[p, "Ref_AA"]]})))
   colnames(weighted_node_probs_ref) <- paste0("wp_", c(1:20)*5, "_ref")
