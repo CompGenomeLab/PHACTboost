@@ -228,7 +228,7 @@ The GRCh38 coordinates reported in ClinVar, gnomAD and HSV are mapped to protein
 If you use this work, please cite:
 
 **Dereli, O.\***, **Kuru, N.\***, Akkoyun, E., Bircan, A., Tastan, O.#, & Adebali, O.# (2024).  
-*Title.* *Molecular Biology and Evolution*, msae136.  
+*PHACTboost: A Phylogeny-Aware Pathogenicity Predictor for Missense Mutations via Boosting.* *Molecular Biology and Evolution*, msae136.  
 https://doi.org/10.1093/molbev/msae136
 
 \* These authors contributed equally to this work. Cofirst authors O.D. and N.K. have the right to list themselves first in the author order on their CVs.  
