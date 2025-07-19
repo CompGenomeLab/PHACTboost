@@ -226,7 +226,8 @@ The GRCh38 coordinates reported in ClinVar, gnomAD and HSV are mapped to protein
 ## Citing this work
 Dereli, O.\*, Kuru, N.\*, Akkoyun, E., Bircan, A., Tastan, O.#, & Adebali, O.# (2024).  
 *Molecular Biology and Evolution*, msae136.  
-\* Co-first authors  
+\* These authors contributed equally to this work. Cofirst authors O.D. and N.K. have the right to list themselves first in the
+author order on their CVs.
 \# Co-corresponding authors 
 
 https://academic.oup.com/mbe/advance-article/doi/10.1093/molbev/msae136/7700170
